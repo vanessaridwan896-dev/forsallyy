@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sally Birthday 🎂</title>
+
+<style>
+
+body{
+	margin:0;
+	height:100vh;
+	background:sandybrown;
+	font-family:cursive;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	overflow:hidden;
+}
+
+canvas{
+	position:fixed;
+	top:0;
+	left:0;
+	pointer-events:none;
+	z-index:1;
+}
+
+
+.container{
+	text-align:center;
+	z-index:2;
+	animation:fadeIn 1.5s ease;
+}
+
+.hidden{ display:none; }
+
+
+span{
+	position:relative;
+	top:20px;
+	font-size:30px;
+	font-weight: 700;
+	color:#654321;
+	animation: bounce 0.6s ease infinite alternate;
+}
+
+@keyframes bounce {
+	100%{
+		top:-20px;
+		text-shadow:
+		0 1px 0 #fff,
+		0 2px 0 #fff,
+		0 3px 0 #fff,
+		0 4px 0 #fff,
+		0 5px 0 #fff,
+		0 6px 0 #fff,
+		0 7px 0 #fff,
+		0 8px 0 #fff,
+		0 9px 0 #fff,
+		0 50px 25px rgba(0,0,0,0,4)
+			;
+	}
+}
+
+
+span:nth-child(2){animation-delay:.1s;}
+span:nth-child(3){animation-delay:.2s;}
+span:nth-child(4){animation-delay:.3s;}
+span:nth-child(5){animation-delay:.4s;}
+span:nth-child(6){animation-delay:5s;}
+span:nth-child(7){animation-delay:.6s;}
+span:nth-child(8){animation-delay:.7s;}
+span:nth-child(9){animation-delay:.8s;}
+span:nth-child(10){animation-delay:.9s;}
+span:nth-child(11){animation-delay:1.0s;}
+span:nth-child(12){animation-delay:1.1s;}
+
+
+.birthday{
+	margin-top:20px;
+	font-size:32px;
+	font-weight:700;
+	color:#654321;
+	letter-spacing:-12px;
+	opacity:0;
+	animation:expand 1.6s ease forwards;
+}
+
+@keyframes expand{
+	0%{letter-spacing:-12px; opacity:0;}
+	100%{letter-spacing:8px; opacity:1;}
+}
+
+button{
+	margin-top:30px;
+	padding:14px 36px;
+	font-size:18px;
+	border:none;
+	border-radius:30px;
+	cursor:pointer;
+	background:#ff6b6b;
+	color:white;
+	transition:.3s;
+}
+
+button:hover{
+	transform:scale(1.1);
+	background:#ff4757;
+}
+
+
+input{
+	padding:12px;
+	border:none;
+	border-radius:20px;
+	font-size:16px;
+	text-align:center;
+}
+
+.audio-wrap{
+  margin-top:20px;
+  text-align:center;
+}
+
+audio{
+  display:inline-block;
+}
+
+.audio-note{
+  margin-top:6px;
+  font-size:14px;
+  color:#654321;
+}
+
+.text{
+	max-width:520px;
+	margin-top:20px;
+	font-size:15px; 
+	line-height:1.6;
+	color:#654321;
+	animation:fadeIn 2s;
+}
+
+.success{
+	font-size:28px;
+	color:#2ed573;
+	margin-bottom:10px;
+}
+
+.error{
+	color:red;
+	margin-top:10px;
+	animation:shake .4s;
+}
+
+@keyframes fadeIn{
+	from{opacity:0; transform:scale(.9);}
+	to{opacity:1; transform:scale(1);}
+}
+
+@keyframes shake{
+	0%{transform:translateX(0);}
+	25%{transform:translateX(-5px);}
+	50%{transform:translateX(5px);}
+	75%{transform:translateX(-5px);}
+	100%{transform:translateX(0);}
+}
+
+
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+	<h1>
+		<span>H</span><span>a</span><span>p</span><span>p</span><span>y</span>
+	</h1>
+	<div class="birthday">Birthday Sallyy 😝🎂</div>
+	<div class="audio-wrap">
+  <audio id="bgm" controls>
+    <source src="happy.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio 😭
+  </audio>
+
+  <div class="audio-note">
+    Click the audio 🔊
+  </div>
+</div>
+	<button onclick="nextPage()">Klik untuk Lanjut 💖</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+	<h2>Masukin Password 🎁</h2>
+	<input type="password" id="password" placeholder="password...">
+	<br><br>
+	<button onclick="checkPassword()">Click Here ✨</button>
+	<div id="msg"></div>
+</div>
+
+<div class="container hidden" id="p3">
+	<div class="cake">🎂</div>
+	<p>Tiup kuenya 🎉</p>
+	<button onclick="next(3)">TIUP 💨</button>
+</div>
+
+
+<div class="container hidden" id="page3">
+	<div class="success">🎉 SELAMAT ULANG TAHUN SALLYYY 🎉</div>
+	<div class="text">
+	Thank you for everything buat 1 stengah tahunnya salll<br>I dont know if i dont meet you at university what will happen...<br>Makasih yaa ceee udah ada di dunia ini <br> 
+	You worth it all kindness that given to you 💖<br>
+	Hrus happpyy trussss PKOKNYA, tell me klo ada yang buat kau sedih, ga enak hati, atau ada masalah.....nanti kita cri solusi breng2<br>
+	Dont forget me yeah nnti meski kitaa udh lulus sama2 wkwkwk<br>I happy became your friend, you're special part of my memory<br>
+	I hope we still be friend forever and still communication until we old ampe jdi nenek2 <br><BR>
+	Dan juga apapun itu dari kau sal itu patut dirayakan, because your existence is meaningful for some people<br>
+	I hope with this you know that you are very importanttt, also i want you to know i'm happy if you happy<br>
+	Jangan ragu yaa cerita apapun itu, i'm excited to know you more<br>
+	Udahh segitu aja, sekiannn... semoga kau suka🥳🎉<br>Tuhan Memberkati😘
+	</div>
+</div>
+
+<script>
+
+const bgm = document.getElementById("bgm");
+
+function nextPage(){
+    page1.classList.add("hidden");
+    page2.classList.remove("hidden");
+
+    bgm.play().catch(()=>{});
+}
+
+const correctPassword = "04012006";
+
+function checkPassword(){
+	if(password.value === correctPassword){
+		page2.classList.add("hidden");
+		page3.classList.remove("hidden");
+		startConfetti();
+	}else{
+		msg.innerHTML = "<div class='error'>❌ Password salah 😭</div>";
+	}
+}
+
+/* ===== CONFETTI ===== */
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let confetti=[];
+
+function startConfetti(){
+	for(let i=0;i<300;i++){
+		confetti.push({
+			x:Math.random()*canvas.width,
+			y:Math.random()*canvas.height,
+			r:Math.random()*6+2,
+			d:Math.random()*4+1,
+			c:`hsl(${Math.random()*360},100%,50%)`
+		});
+	}
+	draw();
+}
+
+function draw(){
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	confetti.forEach(o=>{
+		ctx.beginPath();
+		ctx.fillStyle=o.c;
+		ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
+		ctx.fill();
+		o.y+=o.d;
+		if(o.y>canvas.height){
+			o.y=-10;
+			o.x=Math.random()*canvas.width;
+		}
+	});
+	requestAnimationFrame(draw);
+}
+
+onresize=()=>{
+	canvas.width=innerWidth;
+	canvas.height=innerHeight;
+}
+</script>
+
+</body>
+</html>
